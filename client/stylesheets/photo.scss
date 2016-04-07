@@ -1,0 +1,21 @@
+.makeBigger:before {
+  font-size: 111px;
+}
+
+.makeEvenBigger:before {
+  font-size: 130px;
+}
+
+.makeBigger:hover {
+  color: #0B4787;
+  text-decoration: none;
+}
+
+.makeEvenBigger:hover {
+  color: #0B4787;
+  text-decoration: none;
+}
+
+a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+}
