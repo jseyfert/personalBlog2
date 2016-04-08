@@ -2,56 +2,56 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var Footer = require('./Footer');
 var Header = require('./Header');
-var PhotoApp = require('./PhotoComps/PhotoApp');
+var About = require('./About');
+var PhotoView = require('./PhotoComps/PhotoView');
+var PhotoMainNav = require('./PhotoComps/PhotoMainNav');
+var PhotoContinentNav = require('./PhotoComps/PhotoContinentNav');
 require('./stylesheets/main.scss');
 
 var App = React.createClass({
   getInitialState: function() {
     return {
-      refresh: true,
-      photoApp: true,
-      footer: true
+      activeComponent: 'PhotoMainNav',
+      photoItems: null,
+      photoFormat: null
     }
   },
-  resetPhotoState() {
+  setActiveComponent: function(componentName, photoItems, photoFormat) {
     this.setState({
-      refresh: false,
-      photoApp: true,
-      footer: true
+      activeComponent: componentName,
+      photoItems: photoItems,
+      photoFormat: photoFormat
     })
   },
-  setPhotoState: function() {
+  reSetActiveComponent: function() {
     this.setState({
-      refresh: true,
-      photoApp: true,
-      footer: false
+      activeComponent: 'PhotoMainNav',
+      photoItems: null,
+      photoFormat: null
     })
   },
-  showPhotoApp: function(){
-    if (this.state.photoApp){
-      return <PhotoApp setPhotoState={this.setPhotoState}/>
-    } else {
-      return null;
-    }
+  showWhichComponent: function() {
+    switch(this.state.activeComponent) {
+        case 'PhotoMainNav':
+            return <PhotoMainNav setActiveComponent={ this.setActiveComponent } />
+            break;
+        case 'PhotoContinentNav':
+            return <PhotoContinentNav setActiveComponent={ this.setActiveComponent}/>
+             break;
+        case 'PhotoView':
+            return <PhotoView photoItems={this.state.photoItems}/>
+             break;
+        case 'About':
+            return <About setActiveComponent={ this.setActiveComponent }/>
+    };
   },
-  showFooter: function(){
-    if (this.state.footer){
-      return <Footer/>
-    } else {
-      return null;
-    }
-  },
-  setActiveComponent1: function(componentName) {
-    this.setState({
-      activeComponent: componentName
-    })
-  },
+
   render: function() {
     return (
       <div>
-      <Header buttonToggle={this.state.refresh} resetPhotoState={this.resetPhotoState} />
-      { this.showPhotoApp() }
-      { this.showFooter() }
+      <Header setActiveComponent={this.setActiveComponent} reSetActiveComponent={this.reSetActiveComponent} activeComponent={this.state.activeComponent}/>
+      {this.showWhichComponent()}
+      <Footer/>
       </div>           
       )
   }

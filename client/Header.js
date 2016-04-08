@@ -2,23 +2,25 @@ var React = require('react');
 
 var Footer = React.createClass({
   buttonToggle: function() {
-    if (!this.props.buttonToggle) {
+    console.log('buttonTOGGLE', this.props.activeComponent);
+    if (this.props.activeComponent === 'PhotoMainNav' || this.props.activeComponent === 'About' ) {
       return (
         <div>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-header">
            <a className="whiteText johnny">
-           <i className="fa fa-diamond fa-lg"></i>
+             <i className="fa fa-diamond fa-lg"></i>
            </a>
           </button>
-          <a className="whiteText" href="/">ABOUT</a><span> | </span>
-          <a className="whiteText" href="/photo">INSPIRATION</a><span> | </span>
-          <a className="whiteText" href="/blog">BLOG</a>
+          <a className="whiteText" href="#" onClick={this.props.setActiveComponent.bind(null, 'About')}>ABOUT</a><span> | </span>
+          <a className="whiteText" href="#" onClick={this.props.setActiveComponent.bind(null, 'PhotoMainNav')} >INSPIRATION</a>
         </div>
         )
     } else {
       return (
         <div>
-        <a href="#" onClick={console.log("IN RESET BUTTON")}><i className="icon-refresh makeBigger" ></i></a>
+          <a href="#" onClick={this.props.reSetActiveComponent}>
+            <i className="icon-refresh" ></i>
+          </a>
         </div>
       )
     }
