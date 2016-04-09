@@ -3,6 +3,10 @@ var express = require('express');
 var path = require('path');
 var app = express();
 
+
+var spotifyRoute = require('./routes/spotify');
+app.use('/spotify', spotifyRoute);
+
 if (process.env.NODE_ENV === 'production') {
   console.log('Running in production mode');
 
@@ -22,12 +26,15 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.get('/', function(req, res) {
+  console.log("SpotifyWebApi");
   res.sendFile(path.join(__dirname, 'index.html'));
   // res.json({data: 'yes'});
 });
 
-var port = process.env.PORT || 3000;
 
+
+
+var port = process.env.PORT || 3000;
 app.listen(port, function(){
   console.log("🔥 fired up 🔥 \n🔥 on " + port + " 🔥")
 });

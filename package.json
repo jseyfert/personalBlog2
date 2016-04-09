@@ -37,6 +37,7 @@
     "express": "^4.13.4",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
-    "rimraf": "^2.5.2"
+    "rimraf": "^2.5.2",
+    "spotify-web-api-node": "^2.3.0"
   }
 }
